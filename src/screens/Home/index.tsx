@@ -4,6 +4,10 @@ import { styles } from "./styles";
 
 export function Home() {
   function handleParticipantAdd() {}
+  function handleParticipantRemove(name:string) {
+    console.log(`Voce clicou em remover o ${name}`);
+    
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.eventDate}>31/12/1998</Text>
@@ -20,7 +24,7 @@ export function Home() {
         </TouchableOpacity>
       </View>
 
-      <Participant/>
+      <Participant name="Guilherme" onRemove={() => handleParticipantRemove('Guilherme')}/>
     </View>
   );
 }
