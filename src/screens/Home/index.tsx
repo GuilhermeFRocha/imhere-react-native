@@ -1,17 +1,26 @@
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { Participant } from "../../components/Participant";
 import { styles } from "./styles";
 
 export function Home() {
-  function handleParticipantAdd() {}
-  function handleParticipantRemove(name:string) {
+  const participants = ["Guillherme", "Gabriel", "Thiago"];
+
+  function handleParticipantAdd() {
+    console.log("Voce cliclou em adicionar");
+  }
+  function handleParticipantRemove(name: string) {
     console.log(`Voce clicou em remover o ${name}`);
-    
   }
   return (
     <View style={styles.container}>
       <Text style={styles.eventDate}>31/12/1998</Text>
-      <Text style={styles.eventName}>Guilherme</Text>
+      <Text style={styles.eventName}>Gbariel</Text>
       <View style={styles.form}>
         <TextInput
           style={styles.input}
@@ -24,7 +33,21 @@ export function Home() {
         </TouchableOpacity>
       </View>
 
-      <Participant name="Guilherme" onRemove={() => handleParticipantRemove('Guilherme')}/>
+      <FlatList
+        data={participants}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <Participant
+            key={item}
+            name={item}
+            onRemove={() => handleParticipantRemove("Guilherme")}
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => (
+          <Text style={styles.listEmptyText}>NImguem chegou ainda</Text>
+        )}
+      />
     </View>
   );
 }
